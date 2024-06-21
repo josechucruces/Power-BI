@@ -1,0 +1,25 @@
+﻿DEFINE 
+---- MODEL MEASURES BEGIN ----
+MEASURE 'DAX medidas'[AverageIncomes] = AVERAGE(F_Id[FilteredIncome])
+MEASURE 'DAX medidas'[Median Value Recency] = AVERAGE(F_Id[Recency])
+MEASURE 'DAX medidas'[Number of accepted in last campaigne] = CALCULATE(COUNTA(F_Id[Response]), FILTER( F_Id, F_Id[Response] = "Yes" ))
+MEASURE 'DAX medidas'[Number of complains] = IF(
+    ISBLANK(CALCULATE(COUNTA(F_Id[Complain]), FILTER(F_Id, F_Id[Complain] = "Complain"))),
+    0,
+    CALCULATE(COUNTA(F_Id[Complain]), FILTER(F_Id, F_Id[Complain] = "Complain"))
+)
+MEASURE 'DAX medidas'[Number of Doctorates] = CALCULATE(COUNTA(Dim_Family_Description[Education]), FILTER( Dim_Family_Description, Dim_Family_Description[Education] = "Doctorate" ))
+MEASURE 'DAX medidas'[Number of Fish] = SUM(Dim_Mnt_Products[MntFishProducts])
+MEASURE 'DAX medidas'[Number of Fruits] = SUM(Dim_Mnt_Products[MntFruits])
+MEASURE 'DAX medidas'[Number of Gold] = SUM(Dim_Mnt_Products[MntGoldProds])
+MEASURE 'DAX medidas'[Number of Graduations] = CALCULATE(COUNTA(Dim_Family_Description[Education]), FILTER( Dim_Family_Description, Dim_Family_Description[Education] = "Graduation" ))
+MEASURE 'DAX medidas'[Number of Master] = CALCULATE(COUNTA(Dim_Family_Description[Education]), FILTER( Dim_Family_Description, Dim_Family_Description[Education] = "Master" ))
+MEASURE 'DAX medidas'[Number of Meat] = SUM(Dim_Mnt_Products[MntMeatProducts])
+MEASURE 'DAX medidas'[Number of Primary] = CALCULATE(COUNTA(Dim_Family_Description[Education]), FILTER( Dim_Family_Description, Dim_Family_Description[Education] = "Primary" ))
+MEASURE 'DAX medidas'[Number of Secundary] = CALCULATE(COUNTA(Dim_Family_Description[Education]), FILTER( Dim_Family_Description, Dim_Family_Description[Education] = "Secundary" ))
+MEASURE 'DAX medidas'[Number of Sweet] = SUM(Dim_Mnt_Products[MntSweetProducts])
+MEASURE 'DAX medidas'[Number of Wines] = SUM(Dim_Mnt_Products[MntWines])
+MEASURE 'DAX medidas'[Total number of ID] = COUNTROWS((FILTER(F_Id, NOT(ISBLANK(F_Id[ID])))))
+MEASURE 'DAX medidas'[Total of Campaignes accepted] = SUM(Dim_Results_Campaigne[AcceptedCmp2]) + SUM(Dim_Results_Campaigne[AcceptedCmp3]) + SUM(Dim_Results_Campaigne[AcceptedCmp4]) + SUM(Dim_Results_Campaigne[AcceptedCmp5]) + SUM(Dim_Results_Campaigne[AcceptedCmp1])
+---- MODEL MEASURES END ----
+
